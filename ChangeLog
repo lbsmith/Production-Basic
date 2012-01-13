@@ -1,0 +1,324 @@
+2000-06-04  Lee Smith  <lees@lees1.infoave.net>
+
+	* basic.c: removed debug code i left in accidentally
+
+	* executor.c:
+	modified DUMP to correctly display array elements, also displays
+	a hex listing of string variables
+
+	* utility.c: added readkey to do an unbuffered keyboard read
+
+	* runtime.c:
+	rewrote INPUT, much more stable now, also allows for input of control
+	codes and such like TBred
+
+	* storage.c: fixed various loading/saving problems
+
+2000-05-31  Lee Smith  <lees@lees1.infoave.net>
+
+	* executor.c:
+	DUMP now dumps array information properly, also prompts for the user
+	to press enter when the display is going to scroll
+
+	* utility.c: fixed a few minor bugs
+
+	* runtime.c:
+	added functionality to DIM, when dimensioning string arrays, you can
+	now specify initial length and a fill character
+
+	* storage.c: fixed numerous problems with the loader
+
+	* basic.h:
+	changed OP_OR, OP_AND, OP_XOR opcodes, conflicted with some functions
+
+	* basic.c:
+	fixed parsing problem regarding storing to an array substring
+	l
+
+2000-05-29  Lee Smith  <lees@lees1.infoave.net>
+
+	* executor.c, opcodes.h, token.c, stack.c, utility.c, runtime.c, storage.c, lister.c, basic.h, basic.c:
+	added support for string and numeric arrays
+
+2000-05-27  Lee Smith  <lees@lees1.infoave.net>
+
+	* executor.c, utility.c, runtime.c, storage.c, basic.h, basic.c:
+	dictionary elements are now part of corresponding symbol
+
+2000-05-26  Lee Smith  <lees@lees1.infoave.net>
+
+	* executor.c: modified to use new labelrefs
+
+	* utility.c: slight modifications to use new label stuff
+	rewrite asc2flt, simplified code and increased reliability
+
+	* runtime.c: slight modifications to commands that can use labels
+
+	* storage.c: load/save now uses modified labelrefs
+
+	* lister.c: lister uses modified labelref
+
+	* basic.h: modified labelref structure
+
+2000-05-23  Lee Smith  <lees@lees1.infoave.net>
+
+	* executor.c, token.c, stack.c, utility.c, runtime.c, functions.c, storage.c, lister.c:
+	modified to use new garbage collection library
+
+	* basic.c: modified to use new garbage collection library
+	fixed some problems with using ON and line labels (still buggy)
+
+2000-05-21  Lee Smith  <lees@lees1.infoave.net>
+
+	* opcodes.h, tables.c: added ERR function
+
+	* functions.c: added ERR function
+
+	* basic.c:
+	improved logic used to differentiate between ERR=, ERR the system
+	variable and ERR the function
+
+	* stack.c, basic.c: fixed unary '-' on rpn stack bug
+
+	* executor.c: line references are now executed correctly
+
+	* runtime.c: added ON statement
+
+	* storage.c:
+	modified writeall and loadall to read $01F4$ and $00F4$ used in
+	ON statements to be loaded correctly
+
+	* storage.c: better lineref detecting
+
+	* lister.c: lister support for ON
+
+	* basic.c: added support for ON
+
+	* tables.c: minor table modifications
+
+	* token.c: fixed problem in which using ' as shorthand for EDIT caused
+	mnemonic input to not work
+
+	* executor.c: fixed fnc_strcat to work with hex strings
+
+2000-05-20  Lee Smith  <lees@lees1.infoave.net>
+
+	* runtime.c: READ now works properly
+
+	* executor.c: modifications required by conversion to tbstring
+	also added 2 more convenience functions to push string data to
+	executor stack, one takes tbstring the other takes data and length
+
+	* utility.c: minor modifications to flt2asc
+
+	* runtime.c, functions.c, storage.c:
+	modifications required by conversion to tbstring
+
+	* basic.h:
+	moved execution string handling to use new structure tbstring
+	useful to keep track of length as well as data
+
+2000-05-16  Lee Smith  <lees@lees1.infoave.net>
+
+	* basic.c: now allows for spaces in RECORD statements
+	ie. READ RECORD is now the same as READRECORD
+
+2000-05-14  Lee Smith  <lees@lees1.infoave.net>
+
+	* utility.c:
+	modified SafeMalloc to use calloc rather than malloc, found our calloc
+	initialized allocated memory to 0's, will change function name shortly
+
+	* runtime.c:
+	modified CALL to give error message if used from non-numbered line
+	this is a temporary measure to avoid mysterious segfaults when used
+	from non-numbered lines
+
+	* functions.c: fixed ATH/HTA, now work as expected
+
+	* storage.c: removed some extern declarations
+
+	* basic.h: moved some common function prototypes here
+
+2000-05-11  Lee Smith  <lees@lees1.infoave.net>
+
+	* token.c: made "'" stuff "EDIT" into the command line
+
+	* runtime.c: added EDIT command
+
+2000-05-10  Lee Smith  <lees@lees1.infoave.net>
+
+	* lister.c:
+	finally fixed the annoying 'feature' that made all numeric expressions
+	appear in parenthesis
+
+2000-05-08  Lee Smith  <lees@lees1.infoave.net>
+
+	* runtime.c: added RETRY
+
+	* lister.c: listing RETRY
+
+	* basic.h: minor modifications to envinfo to allow for RETRY
+
+	* basic.c:
+	hacked a fix for bug that caused the command entry prompt to disappear if CTRL-C was pressed during line input
+	,
+
+	* opcodes.h, tables.c: added SETERR
+
+	* runtime.c: added SETERR
+	heavily modified rterror and entire error handling process
+	now uses setjmp/longjmp for immediate error recovery
+
+	* storage.c: minor tweaks to runprog
+
+	* lister.c: listing SETERR
+
+	* basic.h: added a few items to envinfo
+
+	* basic.c: moved rterror over to runtime.c
+
+	* tables.c: added SIZ I/O option to READRECORD
+
+	* runtime.c: READRECORD/WRITERECORD now work for TEXT files
+
+	* basic.h: added OPT information to envinfo
+
+2000-05-07  Lee Smith  <lees@lees1.infoave.net>
+
+	* executor.c: empty strings with substrings are not handled correctly
+
+	* runtime.c: WRITERECORD now checks against record size
+
+	* storage.c:
+	tweaked runprog so pgm->lastexec is set to 0 after a program is completed
+
+2000-05-05  Lee Smith  <lees@lees1.infoave.net>
+
+	* runtime.c: tweaked ENTER to not crash if executed as a RUNed program
+
+	* storage.c: removed line 32700 as being loaded by default
+
+	* basic.c: minor tweak to REM
+
+2000-05-03  Lee Smith  <lees@lees1.infoave.net>
+
+	* runtime.c: FINALLY fixed EXIT bug
+
+2000-05-01  Lee Smith  <lees@lees1.infoave.net>
+
+	* basic.c: fixed REM (again)
+
+2000-04-28  Lee Smith  <lees@lees1.infoave.net>
+
+	* runtime.c:
+	fixed bug in PRINT in which it crashed if given a invalid channel
+
+	* lister.c: made changes to how lister displays statement options
+
+	* basic.h: minor changes
+
+	* basic.c: minor modifications to get ERR option to work w/o channels
+
+2000-04-26  Lee Smith  <lees@lees1.infoave.net>
+
+	* utility.c: added function to return table index of a given command
+
+	* basic.c: checks against invalid channel options
+
+2000-04-25  Lee Smith  <lees@lees1.infoave.net>
+
+	* tables.c: modified command table to store info about all I/O options
+
+2000-04-24  Lee Smith  <lees@lees1.infoave.net>
+
+	* tables.c: modified memory capactity message
+
+	* functions.c: modified ATH, HTA and PGM
+
+2000-04-15  Lee Smith  <lees@lees1.infoave.net>
+
+	* tables.c: took out ? as a command, is now handled by tokenizer
+
+	* token.c: rewrote function/operator with same name logic
+
+	* stack.c: modified stack operations to use struct's with data and type
+
+	* basic.c:
+	modified rpn stack operations to use struct's with data and type
+
+2000-04-05  Lee Smith  <lees@lees1.infoave.net>
+
+	* lister.c: fixed hex string listing
+
+2000-04-04  Lee Smith  <lees@lees1.infoave.net>
+
+	* storage.c: minor paren handling change
+
+	* basic.c: minor paren handling change
+
+2000-04-02  Lee Smith  <lees@lees1.infoave.net>
+
+	* lister.c: improved new lister stability
+
+	* basic.c: fixed stmt continuation
+
+2000-03-31  Lee Smith  <lees@lees1.infoave.net>
+
+	* utility.c: minor modifications to DUMPSTMT
+
+	* lister.c:
+	revised lister, now it doesn't put all numeric expressions in parens
+	(may be buggy)
+
+2000-03-26  Lee Smith  <lees@lees1.infoave.net>
+
+	* utility.c: minor changes to DUMPSTMT
+
+	* runtime.c:
+	TEXT and INDEXED files are now read/write to user, group and world
+	upon creation
+
+	* basic.c: more fixes to channel handler
+
+2000-03-24  Lee Smith  <lees@lees1.infoave.net>
+
+	* storage.c:
+	when saving a file, now sets access permissions to read/write
+	user, group and world.
+
+	* opcodes.h: added opcode for DUMPSTMT
+
+	* tables.c:
+	added channel flag to command table which is used by new channel handler
+
+	* token.c:
+	now can tell the difference between functions and operators with
+	the same name.  (ie. AND/OR/NOT)
+
+	* utility.c, runtime.c: added DUMPSTMT debugging command
+
+	* storage.c:
+	now allows subcommands in a statement to be loaded correctly
+	(ie. in IF/THEN/ELSE)
+
+	* basic.c: improved channel handler
+
+2000-03-18  Lee Smith  <lees@lees1.infoave.net>
+
+	* basic.c: Removed requirement for THEN if IF/THEN statements
+	IF X=5 PRINT "BLAH" is now the same as IF X=5 THEN PRINT "BLAH"
+
+2000-02-24  Lee Smith  <lees@lees1.infoave.net>
+
+	* basic.c: fixed REM bug
+
+2000-01-29  Lee Smith  <lees@lees1.infoave.net>
+
+	* executor.c: fixed GOSUB/RETURN part of DUMP
+
+2000-01-26  Lee Smith  <lees@lees1.infoave.net>
+
+	* basic.h, errors.h, opcodes.h, basic.c, byteswap.c, executor.c, functions.c, lister.c, runtime.c, stack.c, storage.c, tables.c, token.c, utility.c:
+	New file.
+

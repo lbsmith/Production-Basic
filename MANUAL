@@ -1,0 +1,981 @@
+
+
+
+
+                          P r o d u c t i o n  B A S I C                        
+                               Programmer's Manual
+                            Revision 3, 21 June 2000                           
+
+
+
+
+                                                                                
+                                  By Lee Smith                                  
+                              <lbsmithvt@gmail.com>
+
+
+
+
+
+
+Overview:
+--------
+
+The Production Basic project was started in March 1999 to provide a
+commercial quality Business Basic interpreter and Runtime system to
+developers and end users who are familar with the original Basic Four
+Business Basic (1970s) and more recent derivatives.  
+
+Production Basic is available at no charge under the MIT License,
+for any and all uses, personal and business.
+
+Expressions:
+-----------
+
+An expression is two or more elements, consisting of constants, 
+element names, variables, or functions that interact with operators to
+form a new value.
+
+An expression can be used in a screen data field (formula), and 
+conditions.
+
+  Operators in Expressions:
+       +	addition or string concatenation (lowest precedence)
+       -	subtraction
+       *	multiplication
+       /	division
+    ^ or **	exponentiation
+      ()	grouping (highest precedence)
+
+Logical Conditions:
+------- ----------
+
+A logical condition is two or more values, consisting of constants,
+data element names, variables, functions, or expressions that interact
+with relational or logical operators to form either a true or false
+result.
+
+  Operators in Conditions:
+       =	equal to
+       >	greater than
+       <	less than
+    >= or =>	greater than or equal to
+    <= or =<	less than or equal to
+    <> or ><	not equal to
+       ()	grouping
+       AND	logical AND (both true)
+       OR	logical OR (either true)
+
+Boolean Operators:
+------- ---------
+
+  Relational Operators:
+
+    If the relation is true, the result is 1; otherwise the result is 0
+
+  Logical Operators:
+ 
+    The result of AND is 0 if either or both of its operands are 0
+    otherwise the result is 1.  The result of OR is 0 if both of its
+    operands are 0; otherwise the result is 1.
+
+Strings:
+-------
+
+String data is all data that is not numeric.  A string is a connected 
+sequence of characters treated as one piece of data.  A string variable
+is limited to a total length of 65000 bytes.  Each byte in the string 
+data can contain any of the 256 character possibilities.  
+
+String variables and string constants may be concatenated using the +
+operator to form a single series of characters.
+
+  Substrings:
+
+    Substrings can be used in screen data fields, they allow you to 
+    specify a portion of the original value in a data element name.
+ 
+    Substrings can only be used with alphanumeric data elements.
+
+    The syntax is as follows:
+      STRINGNAME$(start-byte[,number-of-bytes])
+      
+      If the number of bytes is not specified, the substring ends with
+      the last byte of the string.
+
+  Hexadecimal Strings:
+
+    Normally strings are entered as literals using quotes (") as 
+    delimiters, however it is sometimes useful to enter values as
+    hexadecimal codes.  This can be used to add nonprintable characters
+    to strings.  In this case use dollar signs ($) as delimiters
+    of the string value.
+    
+    For example:
+      "HELLO WORLD"  	Normal string entry
+      $4C454553$	Hexidecimal string of "LEES" 
+
+Arrays:
+------
+
+An array is a table of data with up to 3 dimensions, requiring integer 
+subscripts to access the individual table entries.  The maximum number 
+of total entries in the array cannot exceed 65000.  Arrays can be 
+created for both numeric data and string data.  
+
+  Creating Arrays:
+
+    Arrays are created through the use of the DIM command.
+
+    DIM variable[dim1[,dim2[,dim3]]]
+  
+  Referencing Arrays:
+
+    Once an array is created, it can be used similar to any other
+    variable.
+
+    PRINT arrayvar[dim1[,dim2[,dim3]]]
+
+    If the referenced dimensions are outside the defined bounds of
+    the array, an error will be generated.
+
+Labels:
+------
+
+Programmers may associate up to 32 alphanumeric names with a numbered
+statement.  These names may then be referenced in any places line
+numbers would be used.  Statement labels can help to make your prrogram
+more readable.  Labels allow you to identify and refer to routines by
+name rather than by line number.
+
+To be able to reference a label name, the label must be declared 
+somewhere in the program.  Label names must be unique; a label name can
+be declared only once in a single program.
+
+Any statement can contain label declarations as sown in the following
+syntax:
+
+  linenum lblname1: lblnamen: command
+
+  linenum 	any valid line number
+  lblname1, 	up to 32 unique label names, label names must begin with
+  lblnamen 	a letter, can be up to 32 characters long, and can 
+		contain any combination of letters (A-Z, a-z) and 
+		numbers (0-9), and the underscore character (_)
+  command	any valid command
+
+Example:
+  1234 ERROR_HANDLER: PRINT "ERROR: ", ERR
+
+This example could be referenced by:
+  2345 GOTO ERROR_HANDLER
+
+User-defined Functions:
+------------ ---------
+
+To simplify the entry of frequently entered formulas, programmers may
+find it useful to write the formula once and refer to it by name when 
+it's used.  To define the function, use the DEF FNx command.  You may
+specify arguments to be passed to the function as well.  User-defined
+functions may be written to return both string and numeric data.
+
+Functions are defined using the following syntax:
+  DEF FNname (arg1, arg2, ...) = formula
+
+  name		alphanumeric name of up to 32 characters to be 
+		associated with the function, if the function is to
+ 		return string data, the last character of name must 
+		be a $
+  arg1, arg2	arguments to be used in the function, and that will
+		be passed in subsequent callings
+  formula	the formula to be evaluated in the function
+
+Example:
+  1234 DEF FNFOO(A,B)=A+B
+
+This example could be referenced by:
+  2345 PRINT FNFOO(10,20)
+
+Console Mode and Command Mode:
+------- ---- --- ------- ----
+
+[ This section to be completed soon ]
+
+Environment Basics:
+----------- ------
+
+[ This section to be completed soon ]
+
+One important note: the command entry line is completely interactive,
+using the arrow keys you can move around the line of text that is 
+displayed and edit it.  It also provides a history system in which 
+commands you have entered are stored, and by pressing the up and down
+arrow keys, you can move forwards and backwards in the history.  The
+selected history is treated as if it was just entered, and you can edit
+it in the same manner.
+
+Input and Output Processing:
+----- --- ------ ----------
+
+[ This section to be completed soon ]
+
+Conventions Used in Reference:
+----------- ---- -- ---------
+
+CAPITALS	keywords that must be entered as shown
+lowercase	values supplied by the user
+[Optional]	optional parts of command or function, if used, should
+                be entered without the brackets
+... (ellipse)	any number of values the same as the preceding value
+                may be entered, do not enter the ellipse
+|		indicates that the values on either side are 
+                independent of each other and can be used together or
+                separate, do not enter the bar (that doesn't sound 
+                quite right).
+anything else	anything not covered in this section should be entered
+                as shown, including any punctuation.
+  
+Implemented Commands:
+----------- --------
+
+BEGIN - Begin Program Environment
+  BEGIN
+
+  Initializes program parameters and environment.
+
+CALL - Call Public Program
+  CALL program-name[,ERR=line-ref | ,ERC=numeric-value][, value-list]
+
+  Executes a public program, passing and receiving data specified in 
+  value-list.
+
+CLEAR - Clear Program Environment
+  CLEAR
+
+  Clears certain program parameters and variables.
+
+CLOSE - End I/O Channel Operations
+  CLOSE (channel[,ERR=line-ref | ,ERC=numeric-value)
+
+  Terminates operation of the designated I/O channel.
+
+DEF FNx - Define Function
+  DEF FNx[$] (variable-list) = string/numeric-expression
+
+  Allows the programmer to define string or numeric functions.
+
+DELETE - Delete Program Statements
+  DELETE [line-ref1 [, line-ref2]]
+
+  Removed statements from program
+
+DIM - Dimension Array
+  Numeric Arrays: 
+    DIM array-name[elem1[,elem2[,elem3]]], ...
+  String Arrays : 
+    DIM array-name[elem1[,elem2[,elem3]]][(length[,init-value)], ...
+
+  Defined an array of up to 3 dimensions.
+
+DUMP - Dump Data and Environment Information
+  DUMP [(channel)]
+ 
+  Prints debugging information about environment and program to
+  specified channel.
+ 
+DUMPSTMT - Dump Statement Information 
+  DUMPSTMT (channel) line-ref
+
+  Prints debugging information about statement stored at line-ref to
+  specified channel.
+
+EDIT - Program Editor
+  EDIT line-ref
+
+  Allows user to edit statements already entered into program.  Is
+  mirrored with the ' command.
+
+END - End Program Execution
+  END
+
+  Terminates program execution.
+
+ENTER - Public Program Entry Point
+  ENTER [variable-list]
+
+  Marks the point where a public program receives its passed data from
+  the CALLing program.
+
+ERASE - Erase File
+  ERASE file-name[,ERR=line-ref | ,ERC=numeric-value]
+
+  Removes a file from a disk directory and releases its disk storage
+  space.
+
+ESCAPE - Escape Program Execution
+  ESCAPE
+
+  Interrupts and suspends program execution.
+
+ESCOFF - Escape Trapping Off
+  ESCOFF
+
+  Disables program escape trapping specified by the SETESC command.
+
+ESCON - Escape Trapping On
+  ESCON
+
+  Enables program escape trapping specified by the SETESC command and
+  reverses the effects of the ESCOFF command.
+
+EXIT - Exit From Public Program
+  EXIT
+
+  Returns from a public program to the CALLing program.
+
+EXTRACTRECORD - Read and Lock Data Record
+  EXTRACTRECORD (channel[,I/O-opts]) string-variable
+
+  Reads the next data record, including any field separator characters
+  to be entered as data into a single string variable.  Does not 
+  increment the file's index counter.
+
+FOR/NEXT - Loop Controlled by Counter
+  FOR numeric-variable = num-value1 TO num-value2 [STEP num-value3]
+  NEXT numeric-variable
+
+  Initiates a FOR/NEXT loop incrementing numeric-value from value1 to
+  value2 by value3 amount.  If value 3 is not given, the default
+  increment is 1.
+
+GOSUB - Branch to Subroutine
+  GOSUB line-ref
+
+  Branches to line-ref and sets up a RETURN pointer to the next 
+  statement after the GOSUB.
+
+GOTO - Unconditional Program Branch
+  GOTO line-ref
+
+  Branches, unconditionally, to line-ref.
+
+IF/THEN/ELSE - Conditional Test
+  IF condition [THEN] statement [ELSE statement]
+
+  Tests for condition and, IF true follows the THEN statement, but if
+  false follows the ELSE statement.
+
+INDEXED - Define Indexed Files
+  INDEXED file-name, num-records, record-size
+
+  Defines a sequential file on disk with the sizes given.
+
+INPUT - Read Terminated by Enter
+  INPUT [(channel[,I/O-opts])] [@(column, row)] [mnemonic,...]
+         [output] [,variable-list]
+
+  Accepts data from terminal or file, with several options, 
+  terminated by pressing enter.
+
+LET - Variable Assignment
+  [LET] variable-name = value
+
+  Assigns a value to a variable-name
+
+LIST - List Program Statements
+  LIST [(channel[,ERR=line-ref | ,ERC=numeric-value][,IND=index-num])]
+         [line-ref1] [,line-ref2]
+
+  Outputs program statements in their fully-expanded, interperative
+  form.
+
+LOAD - Load Program to Memory
+  LOAD program-name
+
+  Transfers a program from storage media into memory in preparation 
+  for RUNning or LISTing.
+
+ON GOSUB - Conditional Gosub
+  ON numeric-value GOSUB line-ref0 [,line-ref1, ...]
+
+  Branches to one of a list of line-refs depending on the value of 
+  numeric-value and sets up a RETURN pointer to the next statement 
+  after the GOSUB.
+
+ON GOTO - Conditional Goto
+  ON numeric-value GOTO line-ref0 [,line-ref1, ...]
+  
+  Branches, unconditionally, to one of a list of line-refs depending
+  on the value of numeric-value.
+
+OPEN - Open a File on I/O Channel
+  OPEN (channel[,ERR=line-ref | ,ERC=numeric-value][,OPT=file-type]
+        [,ISZ=index-size][,SEP=field-sep]) file-name
+
+  Assigns a file or device to an input/output channel and makes it
+  available for communication or data transfer.
+
+PRINT - Output to Printer/Terminal
+  PRINT [(channel[,I/O-opts])] [@(column[,row])] [,mnemonic[,...]]
+         [,output] [,variable-list]
+ 
+  Outputs data from the specified variables to a terminal, printer,
+  or file.  Primarily used to print to terminals and printers.  This
+  command is mirrored by the ? command.
+
+READ - Read Data from I/O Channel
+  READ [(channel[,I/O-opts])] [variable-list]
+
+  READs data from a file or device.
+
+READRECORD - Read Data Record from I/O Channel
+  READRECORD [(channel[,I/O-opts])] string-variable
+
+  READs an entire data record, including any field separators, to be 
+  entered as data into a string variable.
+
+RELEASE - Terminate Task Operation
+  RELEASE
+
+  Returns to the operating system.
+
+REM - Remarks
+  REM [comment]
+ 
+  Allows entry of non-executed comments.
+
+RENAME - Rename File
+  RENAME old-filename, new-filename [,ERR=line-ref | ,ERC=numeric-value]
+
+  Renames a file without changing its characteristics.
+  
+RESET - Reset Program Environment
+  RESET
+
+  Initializes program execution parameters and environment.
+
+RETRY - Retry Statement That Caused Error Branch
+  RETRY
+
+  Transfers program e xecution from an error branch taken by a SETERR
+  command or the ERR= or END= options, back to the statement that 
+  generated the error and attempts to execute it again.
+
+RETURN - Terminate Subroutine
+  RETURN 
+
+  Terminates a subroutine and returns program execution to the statement
+  following the original [ON] GOSUB command.
+
+RUN - Run Program
+  RUN [program-name] [,ERR=line-ref | ,ERC=numeric-value]
+
+  Commences execution of the program.
+
+SAVE - Save Program from Memory to Disk
+  SAVE [program-name] [,ERR=line-ref | ,ERC=numeric-value]
+
+  Write current contents of program memory to a file on disk.
+
+SETERR - Set Error Branch
+  SETERR line-ref
+
+  Transfers program execution to a specific program line number if an 
+  error occurs during execution which is not otherwise handled.
+
+SETESC - Set Escape Branch
+  SETESC line-ref
+
+  Transfers program execution to the specified program line number when
+  then break key is pressed.
+ 
+STOP - Stop Program Execution
+  STOP
+
+  Terminates program execution and initializes certain task parameters.
+
+SYSTEM - Temporary Exit to Operating System
+  SYSTEM [string-value]
+
+  Temporarily exits from Production Basic to the operating system to
+  allow execution of any valid operating system commands or functions.
+
+TEXT - Define System Text File
+  TEXT file-name [,ERR=line-ref | ,ERC=numeric-value]
+
+  Defines a flat-file that is byte oriented, with no concept of records
+  to provice an interface to system text files.
+
+WAIT - Suspend Operation for Specified Time
+  WAIT seconds
+
+  Suspends program execution for a specified period of time.
+
+WHILE/WEND - Loop Controlled by Conditional Test
+  WHILE condition 
+  WEND
+
+  Provides a conditional loop within a program.
+
+WRITE - Write Data to I/O Channel
+  WRITE [(channel[,I/O-opts])] [,variable-list]
+
+  Outputs data from the specified variables to a terminal, printer
+  or file.  Primarily used for files.
+
+WRITERECORD - Write Data Record to I/O Channel
+  WRITERECORD [(channel[,I/O-opts])] string-variable
+
+  Outputs an entire data record to a specified channel including any 
+  separator characters from a single variable.
+
+Implemented System Functions:
+----------- ------ ---------
+
+ABS - Absolute Value (Numeric)
+  ABS (numeric-value)
+
+  Returns the absolute value of numeric-value.
+
+ACS - Arc Cosine (Numeric)
+  ACS (numeric-value)
+
+  Returns the arc cosine of numeric-value.
+
+AND - Logical AND (String)
+  AND (string-value1, string-value2)
+
+  Returns the logical AND, bit by bit, of two string expressions of
+  equal length.
+
+ARG - Arguments for Basic Startup (String)
+  ARG (numeric-value)
+
+  Returns the individual argument specified from the system command that
+  was issued to start Production Basic.
+
+ASC - ASCII Value (Numeric)
+  ASC (string-value)
+
+  Returns the unsigned integer value of a single ASCII character.
+
+ASN - Arc Sine (Numeric)
+  ASN (numeric-value)
+
+  Returns the arc sine of numeric-value.
+
+ATH - ASCII to Hexadecimal (String)
+  ATH (string-value)
+
+  Converts a string containing ASCII characters into a hexidecimal
+  code in half-byte representation, right justified.  The valid ASCII
+  characters are the numbers 0 through 9 and letters A through F.
+
+ATN - Arc Tangent (Numeric)
+  ATN (numeric-value)
+
+  Returns the arc tangent of numeric-value.
+
+ATQ - Arc Tangent of a Quotient (Numeric)
+  ATQ (numeric-value1, numeric-value2)
+
+  Returns the arc tangent of a quotient consisting of two numeric 
+  expressions representing angles in radians.
+
+CHR - Character (String)
+  CHR (numeric-value)
+
+  Converts an integer into its equivalent ASCII character.
+
+COS - Cosine (Numeric)
+  COS (numeric-value)
+
+  Returns the cosine of numeric-value.
+
+CRC - Cyclic Redundancy Code (String)
+  CRC (string-value, 2-byte-string)
+  
+  Conducts a logical operation on the binary form of string-value,
+  byte by byte, and returns a 2-byte ASCII Cyclic Redundancy Code.  
+  The CRC provides some communication error checking on a given 
+  string value with the probability of uniqueness being 1 in 65536.
+
+CVT - Convert String (String)
+  CVT (string-value, numeric-option-value)
+
+  Edits a string-value into a new string value based on the editing 
+  commands specified by the option value.  The function edits the 
+  string-value based on bit positions in the binary code of
+  option-value.  Thus, the maximum size of option-value should be
+  16383 (1+2+4+8+16+32+64+128+256+512+1024+2048+4096+8192)
+
+  Options Available:
+      0	   Do NOT edit.
+      1    Clear the high-order (leftmost) bit in each byte.
+      2    Remove all blanks and tabs.
+      4    Remove unprintable characters below space ($00$ - $1F$)
+      8    Remove all leading spaces and tabs.
+     16    Reduce multiple occurances of spaces and tabs to one each.
+     32    Convert lowercase characters to uppercase.
+     64    Convert "[" and "]" to "(" and ")" respectively.
+    128    Remove all trailing spaces and tabs.
+    256    Don't alter characters within double quotes.
+    512    Swap bytes in every 2-byte pair.
+   1024    Remove all characters that are not spaces or alphanumeric.
+   2048    Same as option value=1, but do not alter field-separators.
+   4096    Convert uppercase characters to lowercase. 
+   8192    Convert entire string to its mirror image.
+
+   Note: Options 1, 2, 4, 64, 256, 512, 1024 and 2048 are currently
+         not implemented.  
+
+ERM - Error Message (String)
+  ERM (numeric-value)
+
+  Returns the text of the specified error code.
+
+ERR - Error Function (Numeric)
+  ERR (numeric-error-list)
+
+  Returns a positive integer based on the value of the ERR system 
+  variable and that value's position in a list of comma separated error 
+  values.
+  
+  The integer value returned is determined as follows: 
+    If the value of the ERR system variable matches the first entry
+    in the error-list, the function returns 1.  If the value of the
+    ERR system variable matches the second entry in the error-list,
+    the function returns 2.  If no match occurs the function returns 0.
+
+EXP - Natural Logarithm Exponent (Numeric)
+  EXP (numeric-value)
+
+  Returns the exponent for a given numeric-value based on its natural
+  logarithm.  
+
+FPT - Fractional Portion (Numeric)
+  FPT (numeric-value)
+  
+  Returns the decimal fractional portion of numeric-value, truncating
+  the integer portion, and maintaining the sign of the original number.
+
+GAP - Generate Odd Parity (String)
+  GAP (string-value)
+
+  Converts each byte in a 7-bit ASCII character string to 8-bit using 
+  the 8th bit as odd parity for the byte.  This is a means of checking
+  for errors in data transmission.
+
+HSH - Hash (String)
+  HSH (string-value, 2-byte-string)
+
+  Conducts a predetermined logical operation on string-value and returns
+  a psuedo-random 2-byte binary string with probability of duplication
+  being 1 in 65536.
+
+HTA - Hexadecimal to ASCII (String)
+  HTA (string-value)
+
+  Converts a hexadecimal string to a printable ASCII character string.
+
+IND - Channel Index (Numeric)
+  IND (channel)
+
+  Returns the index number of the next position of the record pointer 
+  in the file OPEN on the specified channel.  NOTE: this function can
+  not currently be used from within a command's channel information.
+
+INF - System and Task Information (String)
+  INF (numeric-value1, numeric-value2)
+
+  Returns various system and task information.
+
+  numeric-value1    numeric-value2   Information Returned
+        0                 0          Operating system name
+        0                 1          Operating system level
+        1                 1          CPU Id
+        3                 0          2-byte unique process id of task
+        3                 1          Same as 3,0 except 8-bytes long
+        3                 2          User's login id
+        3                 3          User's name
+        7                 0          Production Basic version
+        7                 1          Production Basic compile date
+        7                 2          Production Basic compile time
+
+INT - Integer (Numeric)
+  INT (numeric-value)
+
+  Returns the whole number portion of numeric-value without rounding
+  and maintains its sign.
+
+IOR - Binary Inclusive OR (String)
+  IOR (string-value1, string-value2)
+
+  Conducts a logical inclusive OR operation, bit by bit, on two string
+  values of equal length and returns the resulting value.
+
+LEN - String Length (Numeric)
+  LEN (string-value)
+
+  Returns the length, in number of bytes, of string-value
+
+LOG - Logarithm (Numeric)
+  LOG (numeric-value)
+
+  Returns the base-10 logarithm of numeric-value.
+
+LRC - Longitudinal Redundancy Check (String)
+  LRC (string-value)
+
+  Conducts a byte-by-byte logical XOR operation on each byte in 
+  string-value and returns a one-byte longitudinal redundancy check
+  character.
+
+MAX - Maximum Numeric Value (Numeric)
+  MAX (numeric-value1 [,numeric-value2 [,numeric-value3 [,...]]])
+
+  Returns the maximum value from 1 or more numeric-values.
+
+MIN - Minimum Numeric Value (Numeric)
+  MIN (numeric-value1 [,numeric-value2 [,numeric-value3 [,...]]])
+
+  Returns the minimum value from 1 or more numeric-values.
+  
+MOD - Modulus, Division Remainder (Numeric)
+  MOD (numeric-dividend, numeric-divisor)
+
+  Returns the remainder from the division of the two numbers specified.
+
+NLG - Natural Logarithm (Numeric)
+  NLG (numeric-value)
+
+  Returns the natural logarithm of numeric-value to the base e (2.7828)
+
+NMV - Numeric Value (Numeric)
+  NMV (string-value)
+
+  Determines if string-value contains a valid numeric value.  Returns
+  1 if it does, 0 if it doesn't.
+
+NOT - Binary Inversion (String)
+  NOT (string-value)
+
+  Returns the logical inverse, bit by bit, of string-value.  
+
+NUM - String to Numeric Conversion (Numeric)
+  NUM (string-value)
+
+  Converts string-value that contains a number into its numeric form.
+
+PAD - Justify & Pad String (String)
+  PAD (string-value, new-length [, type-padding] [, pad-character])
+
+  Returns left, right, or center justified string padded to the
+  specified length with the specified pad character.  If not specified
+  the function defaults to left justified with the pad character being
+  a space.  
+ 
+  type-padding = "L" for left justification
+               = "C" for center justification
+               = "R" for right justification
+
+PGM - Hexadecimal Dump of Statement (String)
+  PGM (line-ref)
+
+  Returns a psuedo-compiled form of the specified statement in the
+  current program.
+ 
+RND - Pseudo-random Number Generator (Numeric)
+  RND (numeric-value)
+
+  Generates and returns a psuedo-random number in the range of 0<n<1.  
+  The function uses numeric-value as a seed.
+
+SDX - Soundex Value of String (String)
+  SDX (string-value)
+
+  Returns a four character "Soundex" value for a specified string based
+  on the method originally developed by Margaret K. Odell and Robert C.
+  Russell in 1918 and 1922.
+
+SGN - Determine Sign of Numeric Value (Numeric)
+  SGN (numeric-value)
+
+  Returns +1, 0, or -1 indicating the sign of the specified 
+  numeric-value.  -1 if the value is negative, 0 if the value is zero,
+  +1 if the value is positive.
+
+SIN - Sine of an Angle (Numeric)
+  SIN (numeric-value)
+
+  Returns the sine of numeric-value.
+ 
+SQR - Square Root (Numeric)
+  SQR (numeric-value)
+
+  Returns the square root of numeric-value.
+
+STL - String Length (Numeric)
+  STL (string-value)
+
+  Returns the length, in number of bytes, or string-value.  It functions
+  in exactly the same way as the LEN function.
+
+STR - Numeric to String Conversion (String)
+  STR (numeric-value)
+
+  Converts numeric-value into a formatted string.
+
+SWP - Byte Swap (String)
+  SWP (string-value [,swap-option])
+
+  Performs up to three predefined byte-swapping functions on a string.
+
+  The options are specified by the least-significant three bits of 
+  swap-option.
+
+  bit 0 = swap adjacent bytes
+  bit 1 = swap adjacent 2-byte words
+  bit 2 = swap adjacent 4-byte long words
+
+TAN - Tangent of an Angle (Numeric)
+  TAN (numeric-value)
+
+  Returns the tangent of numeric-value.
+
+TCB - Task Control Block (Numeric)
+  TCB (numeric-value)
+
+  Returns the status of certain program execution values that change 
+  during processing of a task.  These values relate to error and escape
+  processing and are continuously updated by the appropriate commands
+  and system processes.
+
+  numeric-value   information returned
+     0, 1, 2         Undefined
+        3            Last operating system error code
+        4            Current statement number
+        5            Statement number that last caused an error
+        6            Statement number that SETESC is set to
+        7            Statement number that SETERR is set to
+        8            Shell exit code from the last SYSTEM command
+        9            Shell termination status
+
+XOR - Binary Exclusive OR (String)
+  XOR (string-value1, string-value2)
+ 
+  Returns the logical exclusive OR, bit by bit, of two string 
+  expressions of equal length.
+
+Implemented System Variables:
+----------- ------ ---------
+
+ARGC - Argument Count for Basic Startup (Numeric)
+  Returns the number of arguments specified in the system command that
+  was issued to start Production Basic.
+
+CDS - Current Date String (String)
+  Returns current date in SQL string date format.
+
+DAY - System/Task Date (String)
+  Returns the task date as a string.
+
+DIR - Current Directory (String)
+  Returns the full path name of the current directory.
+
+ERR - Last Error Number (Numeric)
+  Returns the number of the last error generated.
+
+ESC - Escape Character (String)
+  Returns the one-byte escape character ($1B$)
+
+OCH - Open Channels (String)
+  Returns a string containing 2-byte binary representation of all
+  OPEN channels (except channel 0)
+
+PGN - Program Name (String)
+  Returns the name of the program currently in program memory space.
+
+QUO - Quote Character (String)
+  Returns the one-byte double quote character ($22$)
+
+SEP - Field Separator Character (String)
+  Returns the one-byte field separator character ($8A$)
+
+SYS - System Name (String)
+  Returns the release number of Production Basic under which the system
+  is operating and some limited data about the operating system.
+
+TIM - Task Time (Numeric)
+  Returns the time currently being used by the task in hours and 
+  decimal hours.
+
+UNT - Lowest Unused Channel (Numeric)
+  Returns the lowest-numbered channel that is not currently open.
+
+Implemented Mnemonics:
+----------- ---------
+
+CS - Clear Screen
+CL - Clear to End of Line
+CR - Carriage Return
+BV - Blink Reverse
+RB - Ring Bell
+BB - Begin Blink
+BF - Reverse Foreground
+ER - End Reverse Foreground
+BR - Reverse Background
+EB - End Blink
+BU - Underline
+EU - End Underline
+CH - Cursor Home
+CE - Clear to End of Window
+ES - Escape Character
+LD - Line Delete
+LI - Line Insert
+VT - Vertical Tab
+LF - Line Feed
+G0 - Horizontal Line
+G1 - Vertical Line
+G2 - Upper Left Corner
+G3 - Upper Right Corner
+G4 - Lower Left Corner
+G5 - Lower Right Corner
+G6 - Connect to Left
+G7 - Connect to Right
+G8 - Connect to Lower
+G9 - Connect to Upper
+GA - Cross in Middle
+GB - High Intensity Block
+GC - Mid Intensity Block
+GD - Low Intensity Block
+GE - Double Vertical Bar
+GF - Double Horizontal Bar
+BLACK - Foreground Black
+BGBLACK - Background Black
+BLUE - Foreground Blue
+BGBLUE - Background Blue
+BROWN - Foreground Brown
+BGBROWN - Background Brown
+CYAN - Foreground Cyan
+BGCYAN - Background Cyan
+GREEN - Foreground Green
+BGGREEN - Background Green
+RED - Foreground Red
+BGRED - Background Red
+WHITE - Foreground White
+BGWHITE - Background White
+MAGENTA - Foreground Magenta
+BGMAGENTA - Background Magenta
+
+Programmer Notes:
+---------- -----
+
+[ This section to be completed soon ]
+
+  File Formats:
+
+  How to Add Commands/Functions:
+
+  Todo List:
+

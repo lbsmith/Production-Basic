@@ -1,0 +1,50 @@
+Production BASIC Revision 0.3.0 [6/21/2000] 
+Lee Smith <lbsmithvt@gmail.com>
+http://github.com/lbsmith
+
+Production Basic is an Open-Source, Multi-user Business Basic compiler/interpreter and run-time environment. This system is intended to be an alternative to commercially available systems, such as Basic/Four, MAI and Thoroughbred.  Production Basic was designed to load and save to Thoroughbred Basic file formats.  
+
+Features:
+  IF/THEN/ELSE testing.
+  GOSUB/RETURNs
+  FOR/NEXT/STEP loops
+  GOTO jumping
+  WHILE/WEND loops
+  other commonly used BASIC verbs (PRINT, INPUT, LET, etc.)
+  Strong substring and string operation mechanism.
+  Many standard Business Basic terminal mnemonics implemented.
+  User-defined program escape trapping (ESCON/ESCOFF/SETESC).
+  Record operations on INDEXED and TEXT external file types.
+  Accurate floating point numbers handled internally (don't use normal C floats or doubles).
+  User-defined internal functions (DEF FN).
+  Public programs with and without parameter lists (CALL/ENTER/EXIT).
+  43 internal functions, 50 terminal mnemonics, 12 system variables, 41 verbs
+  Modular design and strong runtime engine making it easy to add new internal functions.
+
+Dependencies:
+  libgc - the Boehm-Demers-Weiser Garbage Collection Library https://github.com/ivmai/bdwgc
+  libreadline
+
+Implemented Verbs:
+  BEGIN, CALL, CLEAR, CLOSE, DEF FNx, DELETE, DIM, DUMP, DUMPSTMT,
+  EDIT, END, ENTER, ERASE, ESCAPE, ESCOFF, ESCON, EXIT, EXTRACTRECORD,
+  FOR/NEXT, GOSUB/RETURN, GOTO, IF/THEN/ELSE, INDEXED, INPUT, LET,
+  LIST, LOAD, ON GOSUB/GOTO, OPEN, PRINT, READ, READRECORD, RELEASE,
+  REM, RENAME, RESET, RETRY, RUN, SAVE, SETERR, SETESC, STOP, SYSTEM,
+  TEXT, WAIT, WHILE/WEND, WRITE, WRITERECORD
+
+Implemented Functions:
+  ABS, ACS, AND, ARG, ASC, ASN, ATH, ATN, ATQ, CHR, COS, CRC, CVT,
+  ERM, ERR, EXP, FPT, GAP, HSH, HTA, IND, INF, INT, IOR, LEN, LOG,
+  LRC, MAX, MIN, MOD, NLG, NMV, NOT, NUM, PAD, PGM, RND, SDX, SGN,
+  SIN, SQR, STL, STR, SWP, TAN, TCB, XOR
+
+Implemented System Variables:
+  ARGC, CDS, DAY, DIR, ERR, ESC, OCH, PGN, QUO, SEP, SYS, TIM, UNT,
+  
+Implemented Mnemonics (for standard Linux terminals):
+  CS, CR, BV, RB, BF, ER, BR, EB, BU, EU, CH, CE, ES, LD, LI, VT, 
+  LF, BLACK, BGBLACK, BLUE, BGBLUE, BROWN, BGBROWN, CYAN, BGCYAN, 
+  GREEN, BGGREEN, RED, BGRED, WHITE, BGWHITE, MAGENTA, BGMAGENTA,
+  CL, G0, G1, G2, G3, G4, G5, G6, G7, G8, G9, GA, GB, GC, GD, GE,
+  GF

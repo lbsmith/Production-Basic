@@ -1,0 +1,14 @@
+certain functions requiring custom parsing aren't handled right in
+  nested IFs
+
+multi-argument functions used as parameters to arrays
+
+should someday make a real effort to make Production Basic's file format
+  completely compatible with TBred, some things are stored different
+  currently.
+
+CALL doesn't work from non-numbered line
+
+NTD lost 1 day between ntd(112) and ntd(1112) compared to tbred
+    lost 2 days by ntd(777777)
+

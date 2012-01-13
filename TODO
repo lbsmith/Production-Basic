@@ -1,0 +1,27 @@
+Production BASIC TODO List
+--------------------------
+
+These are the main features/changes I would like to see implemented in 
+Production BASIC.  Anyone is encouraged to give them a shot, and if you 
+get any of them working, please submit a patch.
+
+-- Items Remaining to be Implemented --
+- Verbs, functions and system variables not yet implemented
+- Data files: SERIAL, DIRECT, SORT, MSORT
+- Input mnemonic tables
+- Data masking
+- Data dictionary and format maintainance
+- Transaction processing
+- Windows
+- Ghost tasks
+- Interprocess communication
+
+--- Misc. Improvements ---
+* General improvements to parser
+* Move more internal tables, etc. to using pointers rather than static arrays
+* Better error checking.  I'd like to check the unique syntax of all verbs after  a statement is entered, not when the statement is executed.  
+* Expand arithmetic functions & storage structure to use 6 bytes of storage for 
+  the mantisa instead of 4 bytes as are currently used.  
+* Initialization parameters
+* Expand mnemonic table to use multiple terminal types, also make external file.
+* SQL Date Functions/Variables: CDN, CDN, NTD, DTN  
